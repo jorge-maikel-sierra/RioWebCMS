@@ -17,12 +17,13 @@ RioWebCMS es un portafolio tipo landing page diseñado para presentar los servic
 Docker
 DDEV 
 
-`$ git clone https://github.com/jorge-maikel-sierra/RioWebCMS.git`
-`$ cd RioWebCMS`
-`$ ddev config --project-type=laravel --docroot=public --omit-containers=db --disable-settings-management=true`
-`$ ddev start`
-`$ ddev composer install`
-`$ ddev launch`
+$ git clone https://github.com/jorge-maikel-sierra/RioWebCMS.git  
+$ cd RioWebCMS  
+$ ddev config --project-type=laravel --docroot=public --omit-containers=db --disable-settings-management=true  
+$ ddev start  
+$ ddev composer install  
+$ ddev launch  
+
 
 Con esto estas listo para replicar el sitio en tu maquina local 
 
