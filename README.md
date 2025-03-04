@@ -14,15 +14,20 @@ RioWebCMS es un portafolio tipo landing page diseñado para presentar los servic
 
 #### Instala 
 
-Docker
-DDEV 
+[Docker](https://www.docker.com/ "Docker")
+[DDEV ](https://ddev.com/get-started/ "DDEV ")
 
-$ git clone https://github.com/jorge-maikel-sierra/RioWebCMS.git  
-$ cd RioWebCMS  
-$ ddev config --project-type=laravel --docroot=public --omit-containers=db --disable-settings-management=true  
-$ ddev start  
-$ ddev composer install  
-$ ddev launch  
+`git clone https://github.com/jorge-maikel-sierra/RioWebCMS.git  `
+
+`cd RioWebCMS`
+
+`ddev config --project-type=laravel --docroot=public --omit-containers=db --disable-settings-management=true`
+
+`ddev start`
+
+`ddev composer install`
+
+`ddev launch`
 
 
 Con esto estas listo para replicar el sitio en tu maquina local 
@@ -33,16 +38,13 @@ Con esto estas listo para replicar el sitio en tu maquina local
 
 ### 🛠 Pasos para Contribuir  
 
-ddev exec git init
-ddev exec git add .
-ddev exec 'git commit -m "Mi primer commit"'
-ddev exec git branch -M main
-ddev exec git remote add origin git@github.com:jorge-maikel-sierra/RioWebCMS.git
-ddev exec git push -u origin main
-ddev exec git push -u origin main
-ddev exec git push origin main
+`ddev exec git add .`
 
-## Code of Conduct
+`ddev exec 'git commit -m "Mi primer commit`
+
+`ddev exec git push origin main`
+
+## Codigo de conducta
 
 Con el fin de garantizar que la comunidad RioWebCMS sea acogedora para todos, por favor, revise y respete el [Codigo de conducta](https://laravel.com/docs/contributions#code-of-conduct).
 
