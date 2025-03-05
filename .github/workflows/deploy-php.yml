@@ -1,0 +1,40 @@
+name: Deploy RioWebCMS APP
+
+on:
+  push:
+    branches:
+      - main  # Cambia esto si tu rama principal tiene otro nombre
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Connect to server and deploy
+        run: |
+          ssh -p 65002 u998555632@217.196.55.101 << 'EOF'
+          cd /home/u998555632/domains/mediumpurple-peafowl-590205.hostingersite.com/public_html
+          git clone git@github.com:jorge-maikel-sierra/laravel.git .
+          composer2 update
+          composer2 install --no-dev --optimize-autoloader
+          chmod -R 775 storage bootstrap/cache
+          chmod -R 775 public
+          cp .env.example .env
+          echo "APP_NAME=Laravel" >> .env
+          echo "APP_ENV=production" >> .env
+          echo "APP_KEY=" >> .env
+          echo "APP_DEBUG=false" >> .env
+          echo "APP_URL=https://mediumpurple-peafowl-590205.hostingersite.com" >> .env
+          echo "DB_CONNECTION=sqlite" >> .env
+          echo "DB_DATABASE=/home/u998555632/domains/mediumpurple-peafowl-590205.hostingersite.com/public_html/database/database.sqlite" >> .env
+          php artisan migrate --force
+          php artisan db:seed --force
+          php artisan key:generate
+          echo "<IfModule mod_rewrite.c>\n    RewriteEngine On\n    RewriteRule ^(.*)$ public/$1 [L]\n</IfModule>" > .htaccess
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          EOF
