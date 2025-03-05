@@ -20,15 +20,9 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-    - name: Debug SSH Variables
-      run: |
-        echo "SSH_PORT=${{ secrets.SSH_PORT }}"
-        echo "SSH_USER=${{ secrets.SSH_USER }}"
-        echo "SSH_HOST=${{ secrets.SSH_HOST }}"  
-
     - name: Deploy to Server
       run: |
-        ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+        ssh -p 65002 u998555632@217.196.55.101
         cd /home/u998555632/domains/mediumpurple-peafowl-590205.hostingersite.com/public_html
         git pull origin main
         composer2 install --no-dev --optimize-autoloader
@@ -38,7 +32,6 @@ jobs:
         php artisan config:cache
         php artisan route:cache
         php artisan view:cache
-        EOF
 
     - name: Run Tests
       env:
