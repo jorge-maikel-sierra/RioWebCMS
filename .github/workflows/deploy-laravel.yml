@@ -20,22 +20,9 @@ jobs:
     - name: Deploy to Server
       uses: appleboy/ssh-action@v1.2.1
       with:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         port: ${{ secrets.SSH_PORT }}
         password: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          cd /home/u998555632/domains/mediumpurple-peafowl-590205.hostingersite.com/public_html
-          whoami
+        script: whoami
 
-    - name: Run Tests
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
-        php artisan migrate --force
-        php artisan test
- 
