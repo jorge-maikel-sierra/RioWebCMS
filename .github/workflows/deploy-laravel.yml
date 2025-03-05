@@ -20,6 +20,12 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
+    - name: Debug SSH Variables
+      run: |
+        echo "SSH_PORT=${{ secrets.SSH_PORT }}"
+        echo "SSH_USER=${{ secrets.SSH_USER }}"
+        echo "SSH_HOST=${{ secrets.SSH_HOST }}"  
+
     - name: Deploy to Server
       run: |
         ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
