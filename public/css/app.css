@@ -1,0 +1,90 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Estilos de la barra lateral */
+.sidebar {
+    min-height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 250px;
+}
+
+.profile-image img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item {
+    margin-bottom: 5px;
+}
+
+.nav-link {
+    color: #333;
+    padding: 10px 20px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #4CAF50;
+    background-color: #f8f9fa;
+}
+
+/* Estilos del contenido principal */
+.main-content {
+    margin-left: 250px;
+    padding: 0;
+    width: calc(100% - 250px);
+}
+
+/* Estilos para el blog */
+.blog-post {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.blog-meta {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.blog-meta span {
+    margin-right: 15px;
+}
+
+.blog-title {
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+.blog-excerpt {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        min-height: auto;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
