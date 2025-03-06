@@ -30,5 +30,14 @@ jobs:
           composer2 install --no-dev --optimize-autoloader
           chmod -R 775 storage bootstrap/cache
           php -r "file_exists('.env') || copy('.env.example', '.env');"
+          if [ ! -f .htaccess ]; then
+          echo "<IfModule mod_rewrite.c>
+          RewriteEngine On
+          RewriteRule ^(.*)$ public/$1 [L]
+          </IfModule>" > .htaccess
+          echo "Archivo .htaccess creado."
+          else
+          echo "Archivo .htaccess ya existe, no se modificó."
+          fi
           php artisan key:generate
 
