@@ -24,9 +24,3 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: whoami
-
-    - name: Imprimir variables de depuración
-      run: |
-        echo "HOST: ${{ secrets.SSH_HOST }}"
-        echo "USERNAME: ${{ secrets.SSH_USER }}"
-        echo "PORT: ${{ secrets.SSH_PORT }}"
