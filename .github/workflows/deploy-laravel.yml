@@ -23,4 +23,7 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         port: ${{ secrets.SSH_PORT }}
         password: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: whoami
+        script: | 
+          cd /home/u998555632/domains/mediumpurple-peafowl-590205.hostingersite.com/public_html
+          git pull origin main
+          
