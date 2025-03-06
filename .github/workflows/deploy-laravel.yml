@@ -47,6 +47,7 @@ jobs:
           
           php artisan key:generate
           chmod -R 777 storage bootstrap/cache
+          php artisan optimize
           php artisan migrate --force
           php artisan config:cache
           php artisan route:cache
