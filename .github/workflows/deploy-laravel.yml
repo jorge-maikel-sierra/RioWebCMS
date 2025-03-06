@@ -6,7 +6,9 @@ on:
 
 jobs:
   RioWebCMS-deploy:
+
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       issues: write
@@ -25,11 +27,11 @@ jobs:
         password: ${{ secrets.SSH_PRIVATE_KEY }}
         script: | 
           cd /home/u998555632/domains/mediumpurple-peafowl-590205.hostingersite.com/public_html
+
           git pull origin main
-          composer2 update
-          composer2 install --no-dev --optimize-autoloader
-          chmod -R 775 storage bootstrap/cache
+
           php -r "file_exists('.env') || copy('.env.example', '.env');"
+
           if [ ! -f .htaccess ]; then
           echo "<IfModule mod_rewrite.c>
           RewriteEngine On
@@ -39,8 +41,14 @@ jobs:
           else
           echo "Archivo .htaccess ya existe, no se modificó."
           fi
+
+          composer2 update
+          composer2 install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+          
           php artisan key:generate
+          chmod -R 777 storage bootstrap/cache
           php artisan migrate --force
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
+          php artisan test
