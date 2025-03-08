@@ -1,0 +1,54 @@
+name: RioWebCMS
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  RioWebCMS-deploy:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4  
+      
+
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@v1.2.1
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        port: ${{ secrets.SSH_PORT }}
+        password: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: | 
+          cd /home/u998555632/domains/mediumpurple-peafowl-590205.hostingersite.com/public_html
+
+          git pull origin main
+
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+          if [ ! -f .htaccess ]; then
+          echo "<IfModule mod_rewrite.c>
+          RewriteEngine On
+          RewriteRule ^(.*)$ public/$1 [L]
+          </IfModule>" > .htaccess
+          echo "Archivo .htaccess creado."
+          else
+          echo "Archivo .htaccess ya existe, no se modificó."
+          fi
+
+          composer2 update
+          composer2 install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+          
+          php artisan key:generate
+          chmod -R 777 storage bootstrap/cache
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          php artisan test
